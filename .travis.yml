@@ -13,6 +13,6 @@ cache:
 install:
   - npm install
 
-script
+script:
   - bash ./build.sh
   - bash ./.travis-deploy.sh
