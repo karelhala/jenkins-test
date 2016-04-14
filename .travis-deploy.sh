@@ -21,3 +21,5 @@ git commit -m "Deploy to GitHub Pages"
 # /dev/null to hide any sensitive credential data that might otherwise be exposed.
 # tokens GH_TOKEN and GH_REF will be provided as Travis CI environment variables
 git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
+
+exit 0;
