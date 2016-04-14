@@ -1,5 +1,7 @@
 sudo: false
+
 language: node_js
+
 node_js:
   - '5.10.1'
 npm:
@@ -7,5 +9,10 @@ npm:
 cache:
   directories:
     - node_modules
+
 install:
   - npm install
+
+script
+  - bash ./build.sh
+  - bash ./.travis-deploy.sh
