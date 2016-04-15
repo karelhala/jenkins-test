@@ -14,9 +14,8 @@ git init
 # The first and only commit to this new Git repo contains all the
 # files present with the commit message "Deploy to GitHub Pages".
 if [ $TRAVIS_PULL_REQUEST ]; then
-	rm -rf dist/$TRAVIS_PULL_REQUEST
-        cp dist/* dist/$TRAVIS_PULL_REQUEST
-	git add dist/$TRAVIS_PULL_REQUEST
+        cp ./* $TRAVIS_PULL_REQUEST
+	git add $TRAVIS_PULL_REQUEST
 else
 	git add .
 fi
