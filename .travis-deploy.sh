@@ -1,6 +1,6 @@
 #!/bin/bash
 #execute this only when pull requesting to master, or pushing to master
-if [ "$TRAVIS_BRANCH" = "master"]; then
+if [ "$TRAVIS_BRANCH" = "master" ]; then
 	set -e # exit with nonzero exit code if anything fails
 
 	# go to the directory which contains build artifacts and create a *new* Git repo
