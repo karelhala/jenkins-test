@@ -6,7 +6,6 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
 	# go to the directory which contains build artifacts and create a *new* Git repo
 	# directory may be different based on your particular build process
 	cd dist
-	git init
 
 	# inside this git repo we'll pretend to be a new user
 	git config user.name "Travis CI"
@@ -21,6 +20,7 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
 		rm -rf $TRAVIS_PULL_REQUEST/$TRAVIS_PULL_REQUEST
 		git add $TRAVIS_PULL_REQUEST
 	else
+		git init
 		git add .
 	fi
 
