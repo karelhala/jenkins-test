@@ -7,8 +7,6 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
 	# directory may be different based on your particular build process
 	cd dist
 	# inside this git repo we'll pretend to be a new user
-	git config user.name "Travis CI"
-	git config user.email "<your@email.com>"
 
 	# The first and only commit to this new Git repo contains all the
 	# files present with the commit message "Deploy to GitHub Pages".
@@ -23,7 +21,8 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
 		git init
 		git add .
 	fi
-
+	git config user.name "Travis CI"
+        git config user.email "<your@email.com>"
 	git commit -m "Deploy to GitHub Pages"
 
 	# Force push from the current repo's master branch to the remote
