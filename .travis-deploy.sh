@@ -10,9 +10,17 @@ git init
 git config user.name "Travis CI"
 git config user.email "<your@email.com>"
 
+git init
 # The first and only commit to this new Git repo contains all the
 # files present with the commit message "Deploy to GitHub Pages".
-git add .
+if [ $TRAVIS_PULL_REQUEST ]; then
+	rm -rf dist/$TRAVIS_PULL_REQUEST
+        cp dist/* dist/$TRAVIS_PULL_REQUEST
+	git add dist/$TRAVIS_PULL_REQUEST
+else
+	git add .
+fi
+
 git commit -m "Deploy to GitHub Pages"
 
 # Force push from the current repo's master branch to the remote
