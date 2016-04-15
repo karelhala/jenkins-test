@@ -1,6 +1,7 @@
 #!/bin/bash
 #execute this only when pull requesting to master, or pushing to master
-
+export TRAVIS_PULL_REQUEST=9
+export TRAVIS_BRANCH=master
 if [ "$TRAVIS_BRANCH" = "master" ]; then
 	set -e # exit with nonzero exit code if anything fails
 
@@ -13,14 +14,14 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
 	# The first and only commit to this new Git repo contains all the
 	# files present with the commit message "Deploy to GitHub Pages".
 	if [ $TRAVIS_PULL_REQUEST ]; then
+		git fetch "https://${GH_REF}" gh-pages && git cherry-pick FETCH_HEAD
 		rm -rf $TRAVIS_PULL_REQUEST
+# run current changes
 		mkdir $TRAVIS_PULL_REQUEST
-	        cp ./* $TRAVIS_PULL_REQUEST/ -Rv 2>/dev/null || :
+	        mv ./* $TRAVIS_PULL_REQUEST/ -Rv 2>/dev/null || :
 		rm -rf $TRAVIS_PULL_REQUEST/$TRAVIS_PULL_REQUEST/
-		git add $TRAVIS_PULL_REQUEST/
-	else
-		git add .
 	fi
+	git add .
 	git config user.name "Travis CI"
         git config user.email "<your@email.com>"
 	git commit -m "Deploy to GitHub Pages"
