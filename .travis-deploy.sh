@@ -1,12 +1,11 @@
 #!/bin/bash
 #execute this only when pull requesting to master, or pushing to master
-if [ "$TRAVIS_BRANCH" = "master" ]; then
+if [ "$TRAVIS_BRANCH" = "master"]; then
 	set -e # exit with nonzero exit code if anything fails
 
 	# go to the directory which contains build artifacts and create a *new* Git repo
 	# directory may be different based on your particular build process
 	cd dist
-
 	# inside this git repo we'll pretend to be a new user
 	git config user.name "Travis CI"
 	git config user.email "<your@email.com>"
@@ -16,9 +15,10 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
 	if [ $TRAVIS_PULL_REQUEST ]; then
 		rm -rf $TRAVIS_PULL_REQUEST
 		mkdir $TRAVIS_PULL_REQUEST
-	        cp ./* $TRAVIS_PULL_REQUEST -R 2>/dev/null
-		rm -rf $TRAVIS_PULL_REQUEST/$TRAVIS_PULL_REQUEST
-		git add $TRAVIS_PULL_REQUEST
+	        cp ./* $TRAVIS_PULL_REQUEST/ -Rv 2>/dev/null || :
+		rm -rf $TRAVIS_PULL_REQUEST/$TRAVIS_PULL_REQUEST/
+		git init
+		git add $TRAVIS_PULL_REQUEST/
 	else
 		git init
 		git add .
