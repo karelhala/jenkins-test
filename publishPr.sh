@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 #execute only wien pull requesting to master, or pushing to master
-export GH_BRANCH=gh-pages
-echo $GH_REF
+export GH_BRANCH=gh-page
 if [ "${TRAVIS_BRANCH}" = "master" ] && [ ${GH_TOKEN} ]; then
         set -e
 
         # remove folder with github pages branch and recreate it
         rm -rf "../${GH_BRANCH}"
-        git clone -b ${GH_BRANCH} "https://${GH_REF}" "../${GH_BRANCH}"
+        git clone -b ${GH_BRANCH} "https://${GH_REF}.git" "../${GH_BRANCH}"
         rm -rf "../${GH_BRANCH}/${TRAVIS_PULL_REQUEST}"
         mkdir "../${GH_BRANCH}/${TRAVIS_PULL_REQUEST}"
 
