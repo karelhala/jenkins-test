@@ -26,6 +26,6 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
         # will be lost, since we are overwriting it.) We redirect any output to
         # /dev/null to hide any sensitive credential data that might otherwise be exposed.
         # tokens GH_TOKEN and GH_REF will be provided as Travis CI environment variables
-        git push --force --quite "https://${GH_TOKEN}@${GH_REF}.git"
+        git push --force --quiet "https://${GH_TOKEN}@${GH_REF}.git"
 fi
 
