@@ -1,24 +1,21 @@
-#!/bin/bash
-#execute this only when pull requesting to master, or pushing to master
+s only when pull requesting to master, or pushing to master
 export GH_BRANCH=gh-pages
-echo $TRAVIS_BRANCH
-echo $GH_REF
-if [ "$TRAVIS_BRANCH" = "master" ]; then
+if [ "${TRAVIS_BRANCH}" = "master" ] && [ ${GH_TOKEN} ]; then
         set -e
-	
-	# remove folder with github pages branch and recreate it
-        rm -rf ../"${GH_BRANCH}"
-        git clone -b ${GH_BRANCH} "https://${GH_REF}.git" ../"${GH_BRANCH}"
-        rm -rf ../"${GH_BRANCH}"/$TRAVIS_PULL_REQUEST
-        mkdir ../"${GH_BRANCH}"/$TRAVIS_PULL_REQUEST
 
-	# copy dist/ folder to gh-pages folder and chenge to it
-        cp ./dist/* ../"${GH_BRANCH}"/$TRAVIS_PULL_REQUEST/ -rf 2>/dev/null || :
-        cd ../"${GH_BRANCH}"
+        # remove folder with github pages branch and recreate it
+        rm -rf "../${GH_BRANCH}"
+        git clone -b ${GH_BRANCH} "https://${GH_REF}.git" "../${GH_BRANCH}"
+        rm -rf "../${GH_BRANCH}/${TRAVIS_PULL_REQUEST}"
+        mkdir "../${GH_BRANCH}/${TRAVIS_PULL_REQUEST}"
 
-	# add whole repo (currently only contains of dist/prId)
+        # copy dist/ folder to gh-pages folder and chenge to it
+        cp ./dist/* "../${GH_BRANCH}/${TRAVIS_PULL_REQUEST}/" -rf 2>/dev/null || :
+        cd "../${GH_BRANCH}"
+
+        # add whole repo (currently only contains of dist/prId)
         git add .
-        git config user.name "Travis CI"
+        git config user.name "Publish PR"
         git config user.email "<your@email.com>"
         git commit -m "Deploy to GitHub Pages"
 
@@ -29,4 +26,3 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
         # tokens GH_TOKEN and GH_REF will be provided as Travis CI environment variables
         git push --force --quiet "https://${GH_TOKEN}@${GH_REF}.git"
 fi
-
