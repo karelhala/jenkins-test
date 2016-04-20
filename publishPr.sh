@@ -1,6 +1,7 @@
 #!/bin/bash
 #execute this only when pull requesting to master, or pushing to master
 export GH_BRANCH=gh-pages
+echo $TRAVIS_BRANCH
 if [ "$TRAVIS_BRANCH" = "master" ]; then
         set -e
 	
