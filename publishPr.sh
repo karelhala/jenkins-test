@@ -7,7 +7,7 @@ if [ "${TRAVIS_BRANCH}" = "master" ] && [ ${GH_TOKEN} ]; then
 
         # remove folder with github pages branch and recreate it
         rm -rf "../${GH_BRANCH}"
-        git clone -b ${GH_BRANCH} "https://${GH_REF}.git" "../${GH_BRANCH}"
+        git clone -b ${GH_BRANCH} "https://${GH_REF}" "../${GH_BRANCH}"
         rm -rf "../${GH_BRANCH}/${TRAVIS_PULL_REQUEST}"
         mkdir "../${GH_BRANCH}/${TRAVIS_PULL_REQUEST}"
 
