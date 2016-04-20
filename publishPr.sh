@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #execute only wien pull requesting to master, or pushing to master
 export GH_BRANCH=gh-pages
+echo $GH_REF
 if [ "${TRAVIS_BRANCH}" = "master" ] && [ ${GH_TOKEN} ]; then
         set -e
 
